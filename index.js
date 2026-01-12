@@ -10,13 +10,13 @@ const prevButton = document.querySelector('[data-js="button-prev"]');
 const nextButton = document.querySelector('[data-js="button-next"]');
 const pagination = document.querySelector('[data-js="pagination"]');
 
-const card = createCharacterCard();
-cardContainer.append(card);
+/* const card = createCharacterCard();
+cardContainer.append(card); */
 
 // States
-const maxPage = 1;
-const page = 1;
-const searchQuery = "";
+let maxPage = 1;
+let page = 1;
+let searchQuery = "";
 
 // Fetch
 async function fetchCharacters() {
@@ -28,9 +28,15 @@ async function fetchCharacters() {
 
   console.log(data.results);
 
+  cardContainer.innerHTML = "";
+
   /* Funktion, die die Card erstellt und die Paramter übermittelt
     createCharacterCard(data.results);
     */
+  data.results.forEach((charachter) => {
+    const card = createCharacterCard(charachter);
+    cardContainer.append(card);
+  });
 }
 
 fetchCharacters();
