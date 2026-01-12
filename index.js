@@ -10,14 +10,11 @@ const prevButton = document.querySelector('[data-js="button-prev"]');
 const nextButton = document.querySelector('[data-js="button-next"]');
 const pagination = document.querySelector('[data-js="pagination"]');
 
-const card = createCharacterCard();
-cardContainer.append(card);
-
 // States
 const maxPage = 1;
 const page = 1;
 const searchQuery = "";
-
+const characterData = {}
 // Fetch
 async function fetchCharacters() {
   console.clear();
@@ -26,11 +23,16 @@ async function fetchCharacters() {
   // const response = await fetch("https://rickandmortyapi.com/api/character/?page=4");
   const data = await response.json();
 
-  console.log(data.results);
+  console.log(data)
 
-  /* Funktion, die die Card erstellt und die Paramter übermittelt
-    createCharacterCard(data.results);
-    */
+// createCharacterCard(data.results[0]);
+//   // return data.results;
+//   // console.log(data.results[0].image)
+  data.results.forEach((character)=> {
+    let card = createCharacterCard(character)
+    return cardContainer.append(card)
+  })
+ 
 }
 
 fetchCharacters();
