@@ -1,11 +1,19 @@
-.card-container {
-  margin-bottom: 10px;
-}
-.card {
-  width: 300px;
-  background-color: var(--color-secondary);
+main {
+  margin-top: 90px;
+  gap: 10px;
+  margin-bottom: 50px;
 }
 
+.card-container {
+  margin-top: 10px;
+}
+.card {
+  margin-top: 10px;
+  width: 300px;
+  background-color: var(--color-secondary);
+  border-radius: 10px;
+  overflow: hidden;
+}
 .card__info {
   display: grid;
   grid-template-columns: auto 1fr;
@@ -22,4 +30,41 @@
 
 li {
   list-style: none;
+}
+
+@media (min-width: 800px) {
+  main {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .card-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+  }
+  .navigation {
+    width: 650px;
+    align-items: center;
+  }
+  .header {
+    width: 650px;
+  }
+}
+@media (min-width: 1024px) {
+  main {
+    display: grid;
+    max-width: 1024px;
+  }
+  .card-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+  }
+  .header {
+    width: 100%;
+  }
+  .navigation {
+    width: 100%;
+    gap: 200px;
+  }
 }

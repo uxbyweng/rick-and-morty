@@ -1,9 +1,18 @@
 .header {
-  background-color: aliceblue;
+  background-color: #ffee00;
+  backdrop-filter: blur(50px);
   position: fixed;
   top:0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0 -5 5px;
 }
-
+.title {
+  padding: 10px 0;
+}
 .search-bar-container {
   width: 300px;
 }
@@ -13,6 +22,7 @@
   background-color: var(--color-secondary);
   display: grid;
   grid-template-columns: 1fr 24px;
+  border-radius: 30px;
 }
 
 .search-bar__input {
