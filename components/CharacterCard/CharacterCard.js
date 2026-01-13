@@ -26,7 +26,7 @@ export function createCharacterCard(character) {
         <dd class="card__info-description">${character.status}</dd>
 
         <dt class="card__info-title">Type</dt>
-        <dd class="card__info-description">${typeText}</dd>
+        <dd class="card__info-description">${character.type || "Unknown"}</dd>
 
         <dt class="card__info-title">Occurrences</dt>
         <dd class="card__info-description">${occurrences}</dd>
