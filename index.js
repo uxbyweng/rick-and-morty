@@ -1,39 +1,38 @@
 import { initMatrixBackground } from "./components/MatrixBackground/MatrixBackground.js";
 import { createCharacterCard } from "./components/CharacterCard/CharacterCard.js";
-import { initSearchBar } from "./components/SearchBar/SearchBar.js";
-import {
-  createNavButton,
-  initNavButtons,
-} from "./components/NavButton/NavButton.js";
-import {
-  createPagination,
-  setPaginationText,
-  showNoResults,
-} from "./components/NavPagination/NavPagination.js";
+import { createSearchBar } from "./components/SearchBar/SearchBar.js";
+import { createNavButton, initNavButtons } from "./components/NavButton/NavButton.js";
+import { createPagination, setPaginationText, showNoResults } from "./components/NavPagination/NavPagination.js";
 
 const cardContainer = document.querySelector('[data-js="card-container"]');
-const searchBar = document.querySelector('[data-js="search-bar"]');
+const searchBarContainer = document.querySelector('[data-js="search-bar-container"]');
 const navigation = document.querySelector('[data-js="navigation"]');
 
 // Matrix Background
 initMatrixBackground("matrixCanvas");
 
+createSearchBar(searchBarContainer, (query) => {
+    searchQuery = query;
+    page = 1;
+    fetchCharacters();
+});
+
 // Navigation created JS
 const prevButton = createNavButton({
-  label: "previous",
-  className: "button button--prev",
-  testId: "button-prev",
+    label: "previous",
+    className: "button button--prev",
+    testId: "button-prev",
 });
 
 const pagination = createPagination({
-  className: "navigation__pagination",
-  testId: "pagination",
+    className: "navigation__pagination",
+    testId: "pagination",
 });
 
 const nextButton = createNavButton({
-  label: "next",
-  className: "button button--next",
-  testId: "button-next",
+    label: "next",
+    className: "button button--next",
+    testId: "button-next",
 });
 
 navigation.append(prevButton, pagination, nextButton);
@@ -44,45 +43,41 @@ let page = 1;
 let searchQuery = "";
 
 //Search
-initSearchBar(searchBar, (query) => {
-  searchQuery = query;
-  page = 1;
-  fetchCharacters();
+createSearchBar(searchBarContainer, (query) => {
+    searchQuery = query;
+    page = 1;
+    fetchCharacters();
 });
 
 //  Buttons logic
 initNavButtons({
-  nextButton,
-  prevButton,
-  getPage: () => page,
-  setPage: (newPage) => (page = newPage),
-  getMaxPage: () => maxPage,
-  onNavigate: fetchCharacters,
+    nextButton,
+    prevButton,
+    getPage: () => page,
+    setPage: (newPage) => (page = newPage),
+    getMaxPage: () => maxPage,
+    onNavigate: fetchCharacters,
 });
 
 //  Fetch
 async function fetchCharacters() {
-  const response = await fetch(
-    `https://rickandmortyapi.com/api/character/?page=${page}&name=${encodeURIComponent(
-      searchQuery
-    )}`
-  );
+    const response = await fetch(`https://rickandmortyapi.com/api/character/?page=${page}&name=${encodeURIComponent(searchQuery)}`);
 
-  if (!response.ok) {
-    showNoResults({ cardContainer, paginationElement: pagination });
-    maxPage = 1;
-    return;
-  }
+    if (!response.ok) {
+        showNoResults({ cardContainer, paginationElement: pagination });
+        maxPage = 1;
+        return;
+    }
 
-  const data = await response.json();
+    const data = await response.json();
 
-  maxPage = data.info.pages;
-  setPaginationText(pagination, page, maxPage);
+    maxPage = data.info.pages;
+    setPaginationText(pagination, page, maxPage);
 
-  cardContainer.innerHTML = "";
-  data.results.forEach((character) => {
-    cardContainer.append(createCharacterCard(character));
-  });
+    cardContainer.innerHTML = "";
+    data.results.forEach((character) => {
+        cardContainer.append(createCharacterCard(character));
+    });
 }
 
 fetchCharacters();
