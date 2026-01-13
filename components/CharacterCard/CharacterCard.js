@@ -1,27 +1,38 @@
-export function createCharacterCard(characterName, characterImage, characterStatus, characterType, characterOccurency) {
-    // console.log(characterName, characterImage, characterStatus, characterType, characterOccurency);
-    const card = document.createElement("li");
-    card.classList.add("card");
+export function createCharacterCard(character) {
+  const card = document.createElement("li");
+  card.classList.add("card");
 
-    card.innerHTML = `
-              <div class="card__image-container">
-            <img
-              class="card__image"
-              src="${characterImage}"
-              alt="${characterName}"
-            />
-            <div class="card__image-gradient"></div>
-          </div>
-          <div class="card__content">
-            <h2 class="card__title">${characterName}</h2>
-            <dl class="card__info">
-              <dt class="card__info-title">Status</dt>
-              <dd class="card__info-description">${characterStatus}</dd>
-              <dt class="card__info-title">Type</dt>
-              <dd class="card__info-description">${characterType}</dd>
-              <dt class="card__info-title">Occurrences</dt>
-              <dd class="card__info-description">${characterOccurency}</dd>
-            </dl>`;
+  let typeText = character.type;
+  if (typeText === "") {
+    typeText = "Unknown";
+  }
+
+  const occurrences = character.episode.length;
+
+  card.innerHTML = `
+    <div class="card__image-container">
+      <img
+        class="card__image"
+        src="${character.image}"
+        alt="${character.name}"
+      />
+      <div class="card__image-gradient"></div>
+    </div>
+
+    <div class="card__content">
+      <h2 class="card__title">${character.name}</h2>
+      <dl class="card__info">
+        <dt class="card__info-title">Status</dt>
+        <dd class="card__info-description">${character.status}</dd>
+
+        <dt class="card__info-title">Type</dt>
+        <dd class="card__info-description">${character.type || "Unknown"}</dd>
+
+        <dt class="card__info-title">Occurrences</dt>
+        <dd class="card__info-description">${occurrences}</dd>
+      </dl>
+    </div>
+  `;
 
     return card;
 }
