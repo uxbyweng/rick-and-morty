@@ -1,9 +1,8 @@
 import { createCharacterCard } from "./components/CharacterCard/CharacterCard.js";
+import { initSearchBar } from "./components/SearchBar/SearchBar.js";
 
 const cardContainer = document.querySelector('[data-js="card-container"]');
-const searchBarContainer = document.querySelector(
-  '[data-js="search-bar-container"]'
-);
+const searchBarContainer = document.querySelector('[data-js="search-bar-container"]');
 const searchBar = document.querySelector('[data-js="search-bar"]');
 const navigation = document.querySelector('[data-js="navigation"]');
 const prevButton = document.querySelector('[data-js="button-prev"]');
@@ -15,60 +14,52 @@ let maxPage = 0;
 let page = 1;
 let searchQuery = "";
 
-searchBar.addEventListener("submit", (event) => {
-  event.preventDefault();
-
-  const formData = new FormData(searchBar);
-  searchQuery = formData.get("query").trim();
-
-  page = 1;
-  fetchCharacters();
+initSearchBar(searchBar, (query) => {
+    searchQuery = query;
+    page = 1;
+    fetchCharacters();
 });
 
 console.log(maxPage);
 nextButton.addEventListener("click", () => {
-  page === maxPage ? (page = 1) : page++;
-  fetchCharacters();
+    page === maxPage ? (page = 1) : page++;
+    fetchCharacters();
 });
 prevButton.addEventListener("click", () => {
-  page === 1 ? (page = maxPage) : page--;
-  fetchCharacters();
+    page === 1 ? (page = maxPage) : page--;
+    fetchCharacters();
 });
 
 // Fetch
 async function fetchCharacters() {
-  console.clear();
+    console.clear();
 
-  const response = await fetch(
-    `https://rickandmortyapi.com/api/character/?page=${page}&name=${encodeURIComponent(
-      searchQuery
-    )}`
-  ); // first 20 Characters
+    const response = await fetch(`https://rickandmortyapi.com/api/character/?page=${page}&name=${encodeURIComponent(searchQuery)}`); // first 20 Characters
 
-  if (!response.ok) {
+    if (!response.ok) {
+        cardContainer.innerHTML = "";
+        pagination.textContent = "1 / 1";
+
+        const li = document.createElement("li");
+        li.textContent = "No characters found.";
+        cardContainer.append(li);
+        maxPage = 1;
+        return;
+    }
+
+    const data = await response.json();
+
+    console.log(data);
+
+    maxPage = data.info.pages;
+    pagination.textContent = `${page} / ${maxPage}`;
+
     cardContainer.innerHTML = "";
-    pagination.textContent = "1 / 1";
 
-    const li = document.createElement("li");
-    li.textContent = "No characters found.";
-    cardContainer.append(li);
-    maxPage = 1;
-    return;
-  }
-
-  const data = await response.json();
-
-  console.log(data);
-
-  maxPage = data.info.pages;
-  pagination.textContent = `${page} / ${maxPage}`;
-
-  cardContainer.innerHTML = "";
-
-  data.results.forEach((character) => {
-    const card = createCharacterCard(character);
-    cardContainer.append(card);
-  });
+    data.results.forEach((character) => {
+        const card = createCharacterCard(character);
+        cardContainer.append(card);
+    });
 }
 fetchCharacters();
 console.log(maxPage);
