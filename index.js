@@ -1,51 +1,45 @@
 import { createCharacterCard } from "./components/CharacterCard/CharacterCard.js";
 
 const cardContainer = document.querySelector('[data-js="card-container"]');
-const searchBarContainer = document.querySelector('[data-js="search-bar-container"]');
+const searchBarContainer = document.querySelector(
+  '[data-js="search-bar-container"]'
+);
 const searchBar = document.querySelector('[data-js="search-bar"]');
 const navigation = document.querySelector('[data-js="navigation"]');
 const prevButton = document.querySelector('[data-js="button-prev"]');
 const nextButton = document.querySelector('[data-js="button-next"]');
 const pagination = document.querySelector('[data-js="pagination"]');
 
-/* const card = createCharacterCard();
-cardContainer.append(card); */
-
 // States
-let maxPage = 1;
-let page = 1;
+let maxPage = 0;
+let page = 0;
+let character = 0;
 let searchQuery = "";
-
+nextButton.addEventListener("click", ()=> {
+  if (character >= 5){
+    page += 1
+  }
+  character += 1
+  fetchCharacters()
+})
+prevButton.addEventListener("click", ()=> {
+  character -= 1
+  fetchCharacters()
+})
 // Fetch
 async function fetchCharacters() {
-    console.clear();
+  console.clear();
 
-    const response = await fetch("https://rickandmortyapi.com/api/character"); // first 20 Characters
-    const data = await response.json();
-
-    cardContainer.innerHTML = "";
-
-    data.results.forEach((character) => {
-        const card = createCharacterCard(character.name, character.image, character.status, character.type, character.episode.length);
-        cardContainer.append(card);
-    });
-
-    // for (let i = 0; i < data.results.length; i++) {
-    //     const characterName = data.results[i].name;
-    //     const characterImage = data.results[i].image;
-    //     const characterStatus = data.results[i].status;
-    //     const characterType = data.results[i].type;
-    //     const characterOccurency = data.results[i].episode.length;
-
+  const response = await fetch(`https://rickandmortyapi.com/api/character/?page=${page}"`) // first 20 Characters
+  const data = await response.json();
+  console.log(data.info.pages)
+  maxPage = data.info.pages
+  // character = data.results.length
+  console.log(character)
   cardContainer.innerHTML = "";
-
-  /* Funktion, die die Card erstellt und die Paramter übermittelt
-    createCharacterCard(data.results);
-    */
-  data.results.forEach((charachter) => {
-    const card = createCharacterCard(charachter);
-    cardContainer.append(card);
-  });
+  const card = createCharacterCard(data.results[`${character}`]);
+  cardContainer.append(card);
+  pagination.textContent = `${character} / ${maxPage}`
 }
-
 fetchCharacters();
+
