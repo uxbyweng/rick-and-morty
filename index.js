@@ -1,3 +1,4 @@
+import { initMatrixBackground } from "./components/MatrixBackground/MatrixBackground.js";
 import { createCharacterCard } from "./components/CharacterCard/CharacterCard.js";
 import { initSearchBar } from "./components/SearchBar/SearchBar.js";
 import {
@@ -13,6 +14,9 @@ import {
 const cardContainer = document.querySelector('[data-js="card-container"]');
 const searchBar = document.querySelector('[data-js="search-bar"]');
 const navigation = document.querySelector('[data-js="navigation"]');
+
+// Matrix Background
+initMatrixBackground("matrixCanvas");
 
 // Navigation created JS
 const prevButton = createNavButton({
