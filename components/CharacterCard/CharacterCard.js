@@ -34,5 +34,5 @@ export function createCharacterCard(character) {
     </div>
   `;
 
-  return card;
+    return card;
 }
