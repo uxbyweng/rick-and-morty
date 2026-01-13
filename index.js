@@ -15,6 +15,16 @@ let maxPage = 0;
 let page = 1;
 let searchQuery = "";
 
+searchBar.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  const formData = new FormData(searchBar);
+  searchQuery = formData.get("query").trim();
+
+  page = 1;
+  fetchCharacters();
+});
+
 console.log(maxPage);
 nextButton.addEventListener("click", () => {
   page === maxPage ? (page = 1) : page++;
@@ -24,17 +34,35 @@ prevButton.addEventListener("click", () => {
   page === 1 ? (page = maxPage) : page--;
   fetchCharacters();
 });
+
 // Fetch
 async function fetchCharacters() {
   console.clear();
 
   const response = await fetch(
-    `https://rickandmortyapi.com/api/character/?page=${page}`
+    `https://rickandmortyapi.com/api/character/?page=${page}&name=${encodeURIComponent(
+      searchQuery
+    )}`
   ); // first 20 Characters
+
+  if (!response.ok) {
+    cardContainer.innerHTML = "";
+    pagination.textContent = "1 / 1";
+
+    const li = document.createElement("li");
+    li.textContent = "No characters found.";
+    cardContainer.append(li);
+    maxPage = 1;
+    return;
+  }
+
   const data = await response.json();
+
   console.log(data);
+
   maxPage = data.info.pages;
   pagination.textContent = `${page} / ${maxPage}`;
+
   cardContainer.innerHTML = "";
 
   data.results.forEach((character) => {
