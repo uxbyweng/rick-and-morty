@@ -1,3 +1,4 @@
+import { initMatrixBackground } from "./components/MatrixBackground/MatrixBackground.js";
 import { createCharacterCard } from "./components/CharacterCard/CharacterCard.js";
 import { createSearchBar } from "./components/SearchBar/SearchBar.js";
 
@@ -11,6 +12,9 @@ const pagination = document.querySelector('[data-js="pagination"]');
 let maxPage = 0;
 let page = 1;
 let searchQuery = "";
+
+// Matrix Background
+initMatrixBackground("matrixCanvas");
 
 // SearchBar
 createSearchBar(searchBarContainer, (query) => {
