@@ -19,12 +19,18 @@ body {
   font-family: var(--font-family);
   color: var(--color-primary);
   padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 main {
+  margin-top: 90px;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  margin-bottom: 40px;
 }
 
 .title {
