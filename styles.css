@@ -4,35 +4,37 @@
 @import "components/NavPagination/NavPagination.css";
 
 * {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 :root {
-  --color-primary: rgb(51, 51, 51);
-  --color-secondary: #f6f6f6;
-  --font-family: system-ui;
+    --color-primary: rgb(51, 51, 51);
+    --color-secondary: #f6f6f6;
+    --font-family: system-ui;
+    --background: #ffee00;
 }
 
 body {
-  font-family: var(--font-family);
-  color: var(--color-primary);
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+    background: var(--background);
+    font-family: var(--font-family);
+    color: var(--color-primary);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 main {
-  margin-top: 90px;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 40px;
+    margin-top: 90px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 40px;
 }
 
 .title {
-  padding: 10px 0;
+    padding: 10px 0;
 }
