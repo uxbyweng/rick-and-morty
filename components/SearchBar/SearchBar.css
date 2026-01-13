@@ -1,3 +1,9 @@
+.header {
+  background-color: aliceblue;
+  position: fixed;
+  top:0px;
+}
+
 .search-bar-container {
   width: 300px;
 }

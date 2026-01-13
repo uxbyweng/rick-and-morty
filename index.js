@@ -26,26 +26,9 @@ async function fetchCharacters() {
     cardContainer.innerHTML = "";
 
     data.results.forEach((character) => {
-        const card = createCharacterCard(character.name, character.image, character.status, character.type, character.episode.length);
+        const card = createCharacterCard(character)
         cardContainer.append(card);
     });
-
-    // for (let i = 0; i < data.results.length; i++) {
-    //     const characterName = data.results[i].name;
-    //     const characterImage = data.results[i].image;
-    //     const characterStatus = data.results[i].status;
-    //     const characterType = data.results[i].type;
-    //     const characterOccurency = data.results[i].episode.length;
-
-  cardContainer.innerHTML = "";
-
-  /* Funktion, die die Card erstellt und die Paramter übermittelt
-    createCharacterCard(data.results);
-    */
-  data.results.forEach((charachter) => {
-    const card = createCharacterCard(charachter);
-    cardContainer.append(card);
-  });
 }
 
 fetchCharacters();
