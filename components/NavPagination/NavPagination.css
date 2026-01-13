@@ -1,7 +1,11 @@
 .navigation {
   height: 30px;
   display: grid;
+  background-color: aliceblue;
   grid-template-columns: 100px 100px 100px;
+  position: fixed;
+  bottom: 10px;
+
 }
 
 .navigation__pagination {
