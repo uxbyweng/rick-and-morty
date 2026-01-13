@@ -17,20 +17,12 @@ let searchQuery = "";
 
 console.log(maxPage);
 nextButton.addEventListener("click", () => {
-  if (page === maxPage) {
-    page = 1
-  }else{
-    page += 1;
-    fetchCharacters();
-  }
+  page === maxPage ? (page = 1) : page++;
+  fetchCharacters();
 });
 prevButton.addEventListener("click", () => {
-  if (page === 1) {
-    page = 42
-  }else{
-    page -= 1;
-    fetchCharacters();
-  }
+  page === 1 ? (page = maxPage) : page--;
+  fetchCharacters();
 });
 // Fetch
 async function fetchCharacters() {
