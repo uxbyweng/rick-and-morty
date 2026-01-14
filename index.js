@@ -1,5 +1,5 @@
 import { createCharacterCard } from "./components/CharacterCard/CharacterCard.js";
-import { createButton } from "./components/NavButton/NavButton.js";
+import { prevButton, nextButton } from "./components/NavButton/NavButton.js";
 import { createNavPagination } from "./components/NavPagination/NavPagination.js";
 import { createSearchBar } from "./components/SearchBar/SearchBar.js";
 
@@ -16,13 +16,8 @@ createSearchBar(header, (query) => {
   page = 1;
   fetchCharacters();
 });
-const prevButton = createButton(
-  "button button--Prev",
-  "button-prev",
-  "Previous"
-);
-const nextButton = createButton("button button--next", "button-next", "Next");
 const pagination = createNavPagination();
+
 navigation.append(prevButton, pagination, nextButton);
 
 nextButton.addEventListener("click", () => {
