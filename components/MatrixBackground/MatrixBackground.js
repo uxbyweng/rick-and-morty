@@ -5,7 +5,7 @@ export function initMatrixBackground(canvasId = "matrixCanvas") {
 
     const ctx = canvas.getContext("2d");
 
-    const chars = "ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾘﾙﾚﾛﾜﾝ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    const chars = "R I C K";
     const charArr = chars.split("");
 
     const fontSize = 16;
@@ -23,7 +23,7 @@ export function initMatrixBackground(canvasId = "matrixCanvas") {
         ctx.fillStyle = "rgba(255, 238, 0, 0.05)";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        ctx.fillStyle = "#0F0";
+        ctx.fillStyle = "rgb(90, 135, 45)";
         ctx.font = fontSize + "px monospace";
 
         for (let i = 0; i < drops.length; i++) {

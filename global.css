@@ -9,6 +9,7 @@
     --color-secondary: rgb(255, 255, 255);
     --bgcolor-light: rgb(255, 255, 255);
     --bgcolor-dark: rgb(0, 0, 0);
+    --bgcolor-green: rgb(220, 236, 205);
     --bgcolor-yellow: rgb(255, 238, 0);
     --accent-color: rgb(90, 135, 45);
     --font-family: system-ui;
@@ -22,7 +23,7 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #ffee00;
+    background-color: var(--bgcolor-yellow);
 }
 
 .title {
