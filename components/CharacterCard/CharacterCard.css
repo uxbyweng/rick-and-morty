@@ -1,70 +1,77 @@
 main {
-  margin-top: 90px;
-  gap: 10px;
-  margin-bottom: 50px;
+    margin-top: 90px;
+    gap: 20px;
+    margin-bottom: 50px;
 }
 
 .card-container {
-  margin-top: 10px;
+    margin-top: 10px;
 }
 .card {
-  margin-top: 10px;
-  width: 300px;
-  background-color: var(--color-secondary);
-  border-radius: 10px;
-  overflow: hidden;
+    margin-top: 20px;
+    width: 300px;
+    background-color: var(--bgcolor-light);
+    border-radius: 10px;
+    overflow: hidden;
+}
+.card__title {
+    color: var(--accent-color);
 }
 .card__info {
-  display: grid;
-  grid-template-columns: auto 1fr;
+    display: grid;
+    grid-template-columns: auto 1fr;
+}
+dt.card__info-title:nth-of-type(odd),
+dd.card__info-description:nth-of-type(odd) {
+    background: var(--bgcolor-green);
+}
+.card__info-title,
+.card__info-description {
+    padding: 3px 7px 3px 7px;
 }
 .card__content {
-  padding: 10px 20px 20px;
-  display: grid;
-  gap: 20px;
+    padding: 10px 20px 20px;
+    display: grid;
+    gap: 20px;
 }
 
 .card__info-description {
-  text-align: right;
-}
-
-li {
-  list-style: none;
+    text-align: right;
 }
 
 @media (min-width: 800px) {
-  main {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-  }
-  .card-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 20px;
-  }
-  .navigation {
-    width: 650px;
-    align-items: center;
-  }
-  .header {
-    width: 650px;
-  }
+    main {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .card-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 20px;
+    }
+    .navigation {
+        width: 650px;
+        align-items: center;
+    }
+    .header {
+        width: 650px;
+    }
 }
 @media (min-width: 1024px) {
-  main {
-    display: grid;
-    max-width: 1024px;
-  }
-  .card-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 20px;
-  }
-  .header {
-    width: 100%;
-  }
-  .navigation {
-    width: 100%;
-    gap: 200px;
-  }
+    main {
+        display: grid;
+        max-width: 1024px;
+    }
+    .card-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 20px;
+    }
+    .header {
+        width: 100%;
+    }
+    .navigation {
+        width: 100%;
+        gap: 200px;
+    }
 }

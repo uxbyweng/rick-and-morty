@@ -1,16 +1,15 @@
 .button {
-  border: none;
-  height: 40px;
-  width: 80px;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: .5s;
-  background-color: #669933;
-  color: aliceblue;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2),
-  inset 0 0 5px rgba(0, 0, 0, 0.2);
+    border: none;
+    height: 40px;
+    width: 80px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.5s;
+    background-color: var(--accent-color);
+    color: var(--color-secondary);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2), inset 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
 .button:hover {
-  opacity: 0.8;
+    opacity: 0.8;
 }
