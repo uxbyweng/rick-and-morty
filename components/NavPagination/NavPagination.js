@@ -5,3 +5,11 @@ export function createNavPagination(className= "navigation__pagination", attribu
   span.textContent = content
   return span
 }
+export function noResult(container, element){
+  container.innerHTML = "";
+  paginationElement.textContent = "1 / 1";
+
+  const li = document.createElement("li");
+  li.textContent = "No characters found.";
+  element.append(li);
+}

@@ -1,6 +1,9 @@
 import { createCharacterCard } from "./components/CharacterCard/CharacterCard.js";
 import { prevButton, nextButton } from "./components/NavButton/NavButton.js";
-import { createNavPagination } from "./components/NavPagination/NavPagination.js";
+import {
+  createNavPagination,
+  noResult,
+} from "./components/NavPagination/NavPagination.js";
 import { createSearchBar } from "./components/SearchBar/SearchBar.js";
 
 const header = document.querySelector('[data-js="header"]');
@@ -37,12 +40,7 @@ async function fetchCharacters() {
     )}`
   ); // first 20 Characters
   if (!response.ok) {
-    cardContainer.innerHTML = "";
-    pagination.textContent = "1 / 1";
-
-    const li = document.createElement("li");
-    li.textContent = "No characters found.";
-    cardContainer.append(li);
+    noResult(cardContainer, pagination);
     maxPage = 1;
     return;
   }
