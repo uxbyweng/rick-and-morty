@@ -1,10 +1,7 @@
 import { initMatrixBackground } from "./components/MatrixBackground/MatrixBackground.js";
 import { createCharacterCard } from "./components/CharacterCard/CharacterCard.js";
 import { prevButton, nextButton } from "./components/NavButton/NavButton.js";
-import {
-  createNavPagination,
-  noResult,
-} from "./components/NavPagination/NavPagination.js";
+import { createNavPagination, noResult } from "./components/NavPagination/NavPagination.js";
 import { createSearchBar } from "./components/SearchBar/SearchBar.js";
 
 const header = document.querySelector('[data-js="header"]');
@@ -15,44 +12,45 @@ const navigation = document.querySelector('[data-js="navigation"]');
 let maxPage = 0;
 let page = 1;
 let searchQuery = "";
+
+// Matrix
+initMatrixBackground();
+
+// Searchbar
 createSearchBar(header, (query) => {
-  searchQuery = query;
-  page = 1;
-  fetchCharacters();
+    searchQuery = query;
+    page = 1;
+    fetchCharacters();
 });
+
+// Navigation
 const pagination = createNavPagination();
-
-navigation.append(prevButton, pagination, nextButton);
-
 nextButton.addEventListener("click", () => {
-  page === maxPage ? (page = 1) : page++;
-  fetchCharacters();
+    page === maxPage ? (page = 1) : page++;
+    fetchCharacters();
 });
 prevButton.addEventListener("click", () => {
-  page === 1 ? (page = maxPage) : page--;
-  fetchCharacters();
+    page === 1 ? (page = maxPage) : page--;
+    fetchCharacters();
 });
+navigation.append(prevButton, pagination, nextButton);
+
 // Fetch
 async function fetchCharacters() {
-  console.clear();
-  const response = await fetch(
-    `https://rickandmortyapi.com/api/character/?page=${page}&name=${encodeURIComponent(
-      searchQuery
-    )}`
-  ); // first 20 Characters
-  if (!response.ok) {
-    noResult(cardContainer, pagination);
-    maxPage = 1;
-    return;
-  }
-  const data = await response.json();
-  maxPage = data.info.pages;
-  pagination.textContent = `${page} / ${maxPage}`;
-  cardContainer.innerHTML = "";
-  data.results.forEach((character) => {
-    const card = createCharacterCard(character);
-    cardContainer.append(card);
-  });
+    console.clear();
+    const response = await fetch(`https://rickandmortyapi.com/api/character/?page=${page}&name=${encodeURIComponent(searchQuery)}`); // first 20 Characters
+    if (!response.ok) {
+        noResult(cardContainer, pagination);
+        maxPage = 1;
+        return;
+    }
+    const data = await response.json();
+    maxPage = data.info.pages;
+    pagination.textContent = `${page} / ${maxPage}`;
+    cardContainer.innerHTML = "";
+    data.results.forEach((character) => {
+        const card = createCharacterCard(character);
+        cardContainer.append(card);
+    });
 }
-
 fetchCharacters();
