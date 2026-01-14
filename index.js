@@ -1,3 +1,4 @@
+import { initMatrixBackground } from "./components/MatrixBackground/MatrixBackground.js";
 import { createCharacterCard } from "./components/CharacterCard/CharacterCard.js";
 import { prevButton, nextButton } from "./components/NavButton/NavButton.js";
 import {
@@ -53,4 +54,5 @@ async function fetchCharacters() {
     cardContainer.append(card);
   });
 }
+
 fetchCharacters();

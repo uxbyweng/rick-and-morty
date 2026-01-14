@@ -1,17 +1,17 @@
 .navigation {
-  height: 60px;
-  width: 300px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 30px;
-  background-color: aliceblue;
-  position: fixed;
-  bottom: 0px;
-  border-radius: 10px 10px 0 0;
+    height: 60px;
+    width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    background-color: var(--bgcolor-light);
+    position: fixed;
+    bottom: 0px;
+    border-radius: 10px 10px 0 0;
 }
 
 .navigation__pagination {
-  display: grid;
-  place-items: center;
+    display: grid;
+    place-items: center;
 }
