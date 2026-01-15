@@ -3,8 +3,8 @@
     width: 300px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 30px;
+    justify-content: space-evenly;
+    gap: 25px;
     background-color: var(--bgcolor-light);
     position: fixed;
     bottom: 0px;

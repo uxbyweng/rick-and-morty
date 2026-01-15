@@ -1,10 +1,7 @@
 import { initMatrixBackground } from "./components/MatrixBackground/MatrixBackground.js";
 import { createCharacterCard } from "./components/CharacterCard/CharacterCard.js";
 import { prevButton, nextButton } from "./components/NavButton/NavButton.js";
-import {
-  createNavPagination,
-  noResult,
-} from "./components/NavPagination/NavPagination.js";
+import { createNavPagination, noResult } from "./components/NavPagination/NavPagination.js";
 import { createSearchBar } from "./components/SearchBar/SearchBar.js";
 
 // DOM Selector - Wir selektieren nur die Container, weil die UI-Elemente (SearchBar, Buttons, Pagination) per JS erzeugen werden.
@@ -36,14 +33,14 @@ createSearchBar(header, (query) => {
 // Navigation
 const pagination = createNavPagination();
 nextButton.addEventListener("click", () => {
-  page === maxPage ? (page = 1) : page++;
-  fetchCharacters();
+    page === maxPage ? (page = 1) : page++;
+    fetchCharacters();
 });
 prevButton.addEventListener("click", () => {
-  page === 1 ? (page = maxPage) : page--;
-  // wird nach jeder Änderung aufgerufen, damit UI immer zur aktuellen page/searchQuery passt.
+    page === 1 ? (page = maxPage) : page--;
+    // wird nach jeder Änderung aufgerufen, damit UI immer zur aktuellen page/searchQuery passt.
 
-  fetchCharacters();
+    fetchCharacters();
 });
 navigation.append(prevButton, pagination, nextButton);
 
