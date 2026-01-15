@@ -1,14 +1,16 @@
-function createNavPagination(className = "navigation__pagination", attribute = "pagination", content = "1/1") {
-    const span = document.createElement("span");
-    span.className = className;
-    span.setAttribute("data-js", attribute);
-    span.textContent = content;
-    return span;
+function createNavPagination(
+  className = "navigation__pagination",
+  attribute = "pagination",
+  content = "1/1"
+) {
+  const span = document.createElement("span");
+  span.className = className;
+  span.setAttribute("data-jsx", attribute);
+  span.textContent = content;
+  return span;
 }
-function noResult(container) {
-    document.querySelector(`[data-js="pagination"]`);
-    container.innerHTML = "";
-    document.querySelector(`[data-js="pagination"]`).innerHTML = "1 / 1<br>No entries.";
+function noResult(container, element, message) {
+  container.innerHTML = message;
+  element.textContent = "0/0";
 }
-
 export { createNavPagination, noResult };

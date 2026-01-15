@@ -35,6 +35,7 @@
 .search-bar__button {
     border: none;
     background-color: transparent;
+    cursor: pointer;
 }
 
 .search-bar__input:focus {

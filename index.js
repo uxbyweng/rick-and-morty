@@ -20,11 +20,14 @@ initMatrixBackground();
 // Searchbar
 //Callback das er kümmert sich um Input/Submit index.js bekommt nur das Ergebnis (query) und entscheidet was pasiert.
 createSearchBar(header, (query) => {
+  if (!query){
+  } else {
     searchQuery = query;
     // !!! Wichtig bei neuer Suche kann es weniger Seiten geben, das wegen start auf Seite 1 verhindert page out of range 404/keine Ergebnisse.
 
     page = 1;
     fetchCharacters();
+  }
 });
 
 // Navigation
@@ -43,15 +46,19 @@ navigation.append(prevButton, pagination, nextButton);
 
 // Fetch
 async function fetchCharacters() {
-    console.clear();
-    const response = await fetch(`https://rickandmortyapi.com/api/character/?page=${page}&name=${encodeURIComponent(searchQuery)}`); // "encodeURIComponent" schützt die URL bei Leerzeichen/Sonderzeichen // first 20 Characters
+  console.clear();
+  try {
+    const response = await fetch(
+      `https://rickandmortyapi.com/api/character/?page=${page}&name=${encodeURIComponent(
+        searchQuery
+      )}`
+    );
+    if (!response.ok) {
+      throw (Error = "No chracter found");
+    }
+    // "encodeURIComponent" schützt die URL bei Leerzeichen/Sonderzeichen // first 20 Characters
     // API liefert bei “nichts gefunden” typischerweise "404", statt Crash/leerem UI zeigen wir eine klare Meldung und stabilisieren Pagination.
 
-    if (!response.ok) {
-        noResult(cardContainer, pagination);
-        maxPage = 1;
-        return;
-    }
     //maxPage muss nach jedem fetch aktualisiert werden bei Search kann maxPage kleiner sein,
     // "pagination.textContent" zeigt dem User den aktuellen Stand.
     const data = await response.json();
@@ -59,9 +66,12 @@ async function fetchCharacters() {
     pagination.textContent = `${page} / ${maxPage}`;
     cardContainer.innerHTML = "";
     data.results.forEach((character) => {
-        const card = createCharacterCard(character);
-        cardContainer.append(card);
+      const card = createCharacterCard(character);
+      cardContainer.append(card);
     });
+  } catch (error) {
+    noResult(cardContainer, pagination, error);
+  }
 }
 //lädt initial Seite 1 ohne Search und rendert sofort die ersten 20 Charaktere
 
